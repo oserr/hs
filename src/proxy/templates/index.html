@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Haystack</title>
+  </head>
+  <body>
+    <h1>Haystack</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <span>
+        Browse <input type="file" name="file">
+      </span>
+      <input type="submit" value="Upload">
+    </form>
+    <h3>The needles are:</h3>
+    {% for id in needles %}
+      <div>
+        <p>{{ id }}</p>
+        <a href="/show/{{ id }}">Show Needle</a>
+        <a href="/delete/{{ id }}">Delete Needle</a>
+      </div>
+    {% endfor %}
+  </body>
+</html
