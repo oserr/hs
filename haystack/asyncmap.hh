@@ -3,6 +3,12 @@
 #include <mutex>
 #include <unordered_map>
 
+/**
+ * Simple wrapper around an unordered_map to make it thread safe.
+ *
+ * The full functionality provided by unordered_map is not needed, so AsyncMap
+ * only exposes a Get, Put, and Remove operation.
+ */
 template<typename TKey, typename TValue>
 class AsyncMap
 {
