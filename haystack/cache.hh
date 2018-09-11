@@ -6,6 +6,16 @@
 #include <boost/asio.hpp>
 #include <hiredis.h>
 
+/**
+ * The cache component.
+ *
+ * Requests to the store firt hit the cache. If the blob is found in the cache,
+ * then the blob in the cache is served, otherwise the cache forwards the
+ * request to the store. If the store replies with the blob, then the blob is
+ * stored in the cache, and then the cache forwards the blob back to the client.
+ * Internally, Cache does not cache anything, but instead relies on the Redis
+ * for caching.
+ */
 class Cache
 {
 public:
@@ -13,10 +23,16 @@ public:
 
 private:
     static constexpr uint64_t kBuffSize = 1 << 20;
+
+    // The IP address and port where the cache listens for requests.
     std::string cacheIpAddr;
     unsigned cachePort;
+
+    // The IP address and port where Redis listens for requests.
     std::string redisIpAddr;
     unsigned redisPort;
+
+    // The IP address and port where the store listens for requests.
     std::string storeIpAddr;
     std::string storePort;
 
